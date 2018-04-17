@@ -1,13 +1,15 @@
 # vagrant-ubuntu-kube-dev
-Vagrant 로 ubuntu 16.04 VM 2대 이상을 띄워 kubernetes test 환경을 구축
+`minikube` 와 `docker-for-mac` 보다는 조금 더 실제 환경과 유사한 Kubernetes test
+환경을 얻기 위해 Vagrant 를 사용하여 ubuntu 16.04 VM 2대 이상을 띄워 k8s test
+환경을 셋업.
 
-## 1. Provisioning
+## 1. VM Up & Provisioning
 ```
 $ vagrant up
 ```
 
 Vagrantfile 을 수정없이 그대로 사용한다면 각각 master, worker1 이름을 가진 VM 이
-2대 생성된다. master VM 의 ip 는 172.18.18.101 로 셋팅된다.
+2대 생성된다. master VM 의 ip 는 172.18.18.101 로 셋팅된다. (Vagrantfile 참고)
 
 ## 2. Initialize cluster on Master
 ```
