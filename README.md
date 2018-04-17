@@ -171,9 +171,8 @@ master:$ watch kubectl get all --all-namespaces -o wide
 ```
 
 ## 5. Test
-모든 팟이 `Running` 상태가 되었다면 간단한 자기의 `hostname` 을 응답하는 간단한
-애플리케이션을 배포해보자.
-
+모든 팟이 `Running` 상태가 되었다면 애플리케이션을 배포할 준비가 된 것이다.
+컨테이너 자신의 `hostname` 을 응답하는 간단한 애플리케이션 서버를 배포해보자.
 ```
 master:$ kubectl run whoami --image=jwilder/whoami
 master:$ kubectl get all
@@ -190,8 +189,8 @@ NAME                                DESIRED   CURRENT   READY     AGE
 replicaset.apps/whoami-84c96fd974   1         1         1         8m
 ```
 
-접속이 잘 되는지 봐야하니 `service` 를 만들고 접속해보자. 참고로 앱은 8000번
-port 를 사용한다.
+접속이 잘 되는지 확인하기 위해 `service` 를 생성 한 후 접속해보자. 참고로 서버는
+`8000`번 port 를 사용한다.
 ```
 matser:$ kubectl expose deploy/whoami --type=NodePort --name=hello-service --port=8000
 matser:$ kubectl get svc
@@ -201,17 +200,18 @@ hello-service   NodePort    10.99.246.93   <none>        8000:32414/TCP   3m
 kubernetes      ClusterIP   10.96.0.1      <none>        443/TCP          41m
 ```
 
-worker VM 의 private IP 주소는 172.18.18.102 이며 HOST OS 에서 접근 가능하다.
-브라우저를 열어 확인하자. http://172.18.18.102:32414 (32414는 랜덤부여됨)
+worker VM 의 private IP 주소는 `172.18.18.102` 이며 HOST OS 에서 접근 가능하다.
+http://172.18.18.102:32414 (32414는 랜덤부여됨) 주소를 브라우저로 접근해보자.
 
 ```
 I'm whoami-84c96fd974-67bgt
 ```
 
-브라우저에 위와 같이 찍힌다면 성공!
+위와 같이 찍힌다면 성공!
 
 ## 6. References
 
 - https://kubernetes.io/docs/setup/independent/install-kubeadm/
+- https://hub.docker.com/r/jwilder/whoami/
 
 [pod_network]: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
